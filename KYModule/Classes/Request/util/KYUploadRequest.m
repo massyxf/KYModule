@@ -16,12 +16,15 @@
 
 @implementation KYUploadRequest
 
--(NSURLSessionDataTask *)startUploadRequest{
-    _task = [KYNetServiceManager uploadUrl:_url data:_dataArray params:_params progress:_progressBlock complete:_completeBlock];
+-(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+    void (^uploadCompleteBlock)(NSDictionary *,NSError *) = ^(NSDictionary *result,NSError *error){
+        completion(self,result,error);
+    };
+    _task = [KYNetServiceManager uploadUrl:_url data:_dataArray params:_params progress:_progressBlock complete:uploadCompleteBlock];
     return _task;
 }
 
--(void)cancelTask{
+-(void)cancel{
     [_task cancel];
 }
 

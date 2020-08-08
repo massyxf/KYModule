@@ -110,13 +110,13 @@
             [formData appendPartWithFileData:model.data name:model.name fileName:model.filename mimeType:model.mimetype];
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        progress(1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        !progress ? : progress(1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         KYLog(@"upload success:%@,%@",url,responseObject);
-        complete(responseObject,nil);
+        !complete ? : complete(responseObject,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         KYLog(@"upload fail:%@,%@",url,error);
-        complete(nil,error);
+        !complete ? : complete(nil,error);
     }];
 }
 
@@ -128,15 +128,15 @@
     AFHTTPSessionManager *manager = serviceManager.manager;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        progress(1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        !progress ? : progress(1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         return [NSURL fileURLWithPath:cachePath];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         if (error) {
-            complete(nil,error);
+            !complete ? : complete(nil,error);
             return ;
         }
-        complete(@{@"code":@"1"},nil);
+        !complete ? : complete(@{@"code":@"1"},nil);
     }];
     [task resume];
     return task;

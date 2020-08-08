@@ -7,8 +7,23 @@
 
 #import "KYRequest.h"
 
+@interface KYRequest ()
+
+@end
+
 @implementation KYRequest
 
--(void)cancel{}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _shouldContinue = YES;
+    }
+    return self;
+}
+
+-(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{ return nil; }
+
+-(void)cancel{ }
 
 @end

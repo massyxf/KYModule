@@ -10,24 +10,30 @@
 #import "KYNetServiceManager.h"
 
 @interface KYDownloadRequest (){
-    NSURLSessionDownloadTask *_task;
+    NSURLSessionDataTask *_task;
 }
 
 @end
 
 @implementation KYDownloadRequest
 
--(NSURLSessionDownloadTask *)startDownloadRequest{
-    __weak typeof(self) weakSelf = self;
+-(NSString *)cachedPath{
+    if (!_cachedPath) {
+        NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+        _cachedPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@(time).stringValue];
+    }
+    return _cachedPath;
+}
+
+-(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+    void (^downloadCompleteBlock)(NSDictionary *,NSError *) = ^(NSDictionary *result,NSError *error){
+        !completion ? : completion(self,result,error);
+    };
+    
     _task = [KYNetServiceManager downloadUrl:_url
                                     progress:_progressBlock
                                    cachePath:_cachedPath
-                                    complete:^(NSDictionary *result, NSError *error) {
-        if (error.code == NSURLErrorCancelled || !weakSelf) {
-            return ;
-        }
-        weakSelf.completeBlock(result, error);
-    }];
+                                    complete:downloadCompleteBlock];
     return _task;
 }
 

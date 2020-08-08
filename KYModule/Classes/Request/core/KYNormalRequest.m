@@ -61,7 +61,7 @@
     
     void (^resultComplete)(NSDictionary *,NSError *) = ^(NSDictionary *_Nullable result, NSError *_Nullable error){
         if (result) {
-            completion(result,nil);
+            completion(self,result,nil);
             return ;
         }
         
@@ -71,7 +71,7 @@
                 [self startRequestWithCompletion:completion];
                 return;
             }
-            completion(nil,error);
+            completion(self,nil,error);
         }
     };
     if (self.requestType == KYRequestPost) {

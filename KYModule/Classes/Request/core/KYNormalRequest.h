@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 请求类型，默认NDRequestPost
 @property (nonatomic,assign)KYRequestType requestType;
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion;
 
 @end
 

@@ -5,19 +5,18 @@
 //  Created by yxf on 2020/8/8.
 //
 
-#import <Foundation/Foundation.h>
 #import "KYNormalRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYGroupRequest : NSObject
+@interface KYGroupRequest : KYRequest
 
--(instancetype)initWithRequestArr:(NSArray<KYNormalRequest *> *)requestArr endRequest:(KYNormalRequest *_Nullable)request;
+@property (nonatomic,copy)KYRequestComplete requestComplete;
 
--(void)startGroupRequestsWithRequestComplete:(nullable void(^)(KYNormalRequest *request,NSDictionary *result,NSError *error))requestComplete
-                               groupComplete:(nullable void(^)(void))groupComplete;
+///组请求全部完成的回调,但是在cancel时不会回调
+@property (nonatomic,copy)KYRequestVoidComplete groupComplete;
 
--(void)cancel;
+-(instancetype)initWithRequestArr:(NSArray<KYRequest *> *)requestArr endRequest:(KYRequest *_Nullable)request;
 
 @end
 

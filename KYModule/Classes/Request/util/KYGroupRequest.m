@@ -9,14 +9,17 @@
 
 @interface KYGroupRequest ()
 
-@property (nonatomic,copy)NSArray<KYNormalRequest *> *requestArr;
-@property (nonatomic,strong)KYNormalRequest *endRequest;
+@property (nonatomic,copy)NSArray<KYRequest *> *requestArr;
+@property (nonatomic,strong)KYRequest *endRequest;
+
+///请求完成源于cancel
+@property (nonatomic,assign)BOOL isCancelReason;
 
 @end
 
 @implementation KYGroupRequest
 
--(instancetype)initWithRequestArr:(NSArray<KYNormalRequest *> *)requestArr endRequest:(KYNormalRequest *)request{
+-(instancetype)initWithRequestArr:(NSArray<KYRequest *> *)requestArr endRequest:(KYRequest *)request{
     if (self = [super init]) {
         _requestArr = [requestArr copy];
         _endRequest = request;
@@ -24,31 +27,40 @@
     return self;
 }
 
--(void)startGroupRequestsWithRequestComplete:(void (^)(KYNormalRequest * _Nonnull, NSDictionary * _Nonnull, NSError * _Nonnull))requestComplete groupComplete:(void (^)(void))groupComplete{
+-(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     dispatch_queue_t queue = dispatch_queue_create("ky_group_request_queue", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
-    [_requestArr enumerateObjectsUsingBlock:^(KYNormalRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_requestArr enumerateObjectsUsingBlock:^(KYRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         dispatch_group_enter(group);
         dispatch_group_async(group, queue, ^{
-            [obj startRequestWithCompletion:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
-                !requestComplete ? : requestComplete(obj,result,error);
+            [obj startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
+                !self.requestComplete ? : self.requestComplete(request,result,error);
                 dispatch_group_leave(group);
             }];
         });
     }];
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (self.endRequest) {
-            [self.endRequest startRequestWithCompletion:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
-                !requestComplete ? : requestComplete(self.endRequest,result,error);
-                !groupComplete ? : groupComplete();
+            [self.endRequest startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
+                !self.requestComplete ? : self.requestComplete(self.endRequest,result,error);
+                [self callCompleteBlock];
             }];
             return;
         }
-        !groupComplete ? : groupComplete();
+        [self callCompleteBlock];
     });
+    return nil;
+}
+
+-(void)callCompleteBlock{
+    if (_isCancelReason) {
+        return;
+    }
+    !self.groupComplete ? : self.groupComplete();
 }
 
 -(void)cancel{
+    _isCancelReason = YES;
     [_requestArr makeObjectsPerformSelector:@selector(cancel)];
 }
 

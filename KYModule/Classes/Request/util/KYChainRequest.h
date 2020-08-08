@@ -7,16 +7,15 @@
 
 #import "KYNormalRequest.h"
 
-typedef void(^KYChainRequestComplete)(KYRequest * _Nullable request,NSDictionary *_Nullable result,NSError *_Nullable error,BOOL *_Nullable shouldContinue);
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYChainRequest : KYRequest
 
--(instancetype)initWithRequestArr:(NSArray<KYRequest *> *)requestArr;
+@property (nonatomic,copy)KYRequestComplete requestComplete;
+///链式请求全部完成的回调,但是在cancel时不会回调
+@property (nonatomic,copy)KYRequestVoidComplete chainComplete;
 
--(void)startChainRequestsWithRequestComplete:(nullable KYChainRequestComplete)requestComplete
-                               chainComplete:(nullable void(^)(void))chainComplete;
+-(instancetype)initWithRequestArr:(NSArray<KYRequest *> *)requestArr;
 
 @end
 

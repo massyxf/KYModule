@@ -6,11 +6,11 @@
 //  Copyright © 2019 k_yan. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "KYRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYDownloadRequest : NSObject
+@interface KYDownloadRequest : KYRequest
 
 ///url
 @property (nonatomic,copy)NSString *url;
@@ -21,12 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///进度
 @property (nonatomic,copy)void (^progressBlock)(float progress);
 
-///完成的回调
-@property (nonatomic,copy)void (^completeBlock)(NSDictionary *result, NSError *error);
-
--(NSURLSessionDownloadTask *)startDownloadRequest;
-
--(void)cancelTask;
 
 @end
 

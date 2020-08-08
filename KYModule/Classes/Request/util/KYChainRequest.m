@@ -33,7 +33,7 @@
     return _sema;
 }
 
--(void)startChainRequestsWithRequestComplete:(KYChainRequestComplete)requestComplete chainComplete:(void (^)(void))chainComplete{
+-(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     dispatch_queue_t queue = dispatch_queue_create("ky_chain_request_queue", DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
         BOOL *shouldContinue = NULL;
@@ -46,25 +46,24 @@
                 return;
             }
             self.currentRequest = obj;
-            if ([obj isKindOfClass:[KYNormalRequest class]]) {
-                KYNormalRequest *normalObj = (KYNormalRequest *)obj;
-                [normalObj startRequestWithCompletion:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
-                    if (error.code == NSURLErrorCancelled) {
-                        *shouldContinue = NO;
-                        dispatch_semaphore_signal(self.sema);
-                        return;
-                    }
-                    !requestComplete ? : requestComplete(obj,result,error,shouldContinue);
+            [obj startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
+                if (error.code == NSURLErrorCancelled) {
+                    *shouldContinue = NO;
                     dispatch_semaphore_signal(self.sema);
-                }];
-            }
+                    return;
+                }
+                !self.requestComplete ? : self.requestComplete(request,result,error);
+                *shouldContinue = request.shouldContinue;
+                dispatch_semaphore_signal(self.sema);
+            }];
         }];
         if (*shouldContinue) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                !chainComplete ? : chainComplete();
+                !self.chainComplete ? : self.chainComplete();
             });
         }
     });
+    return nil;
 }
 
 -(void)cancel{
