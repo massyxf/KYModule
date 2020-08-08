@@ -1,0 +1,6 @@
+framework module KYModule {
+  umbrella header "KYModule-umbrella.h"
+
+  export *
+  module * { export * }
+}

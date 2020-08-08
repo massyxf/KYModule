@@ -59,14 +59,14 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		694B8B38596827C069F3F457 /* Pods_KYModule_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KYModule_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7D7242DEEE2AD6E84F188410 /* KYModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = KYModule.podspec; path = ../KYModule.podspec; sourceTree = "<group>"; };
+		7D7242DEEE2AD6E84F188410 /* KYModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KYModule.podspec; path = ../KYModule.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		82BEE4A72573090A0C16659F /* Pods-KYModule_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYModule_Example.debug.xcconfig"; path = "Target Support Files/Pods-KYModule_Example/Pods-KYModule_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5C042643043AEE9760FFB3E /* Pods_KYModule_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KYModule_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0C65D2CBC5525259190676 /* Pods-KYModule_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYModule_Example.release.xcconfig"; path = "Target Support Files/Pods-KYModule_Example/Pods-KYModule_Example.release.xcconfig"; sourceTree = "<group>"; };
-		D0B5E7E269BAEAAC3843D88E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D0B5E7E269BAEAAC3843D88E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DECE54B9786A3FC6BFCDE2BD /* Pods-KYModule_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYModule_Tests.debug.xcconfig"; path = "Target Support Files/Pods-KYModule_Tests/Pods-KYModule_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E84498A9E9E46EB50204518B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E84498A9E9E46EB50204518B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,6 @@
 				DECE54B9786A3FC6BFCDE2BD /* Pods-KYModule_Tests.debug.xcconfig */,
 				464ADA2E9E81389FEB79F7C6 /* Pods-KYModule_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -258,6 +257,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -346,11 +346,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-KYModule_Example/Pods-KYModule_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/KYModule/KYModule.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KYModule.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

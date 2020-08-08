@@ -1,0 +1,49 @@
+PODS:
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - KYModule (0.1.0):
+    - KYModule/Base (= 0.1.0)
+    - KYModule/Foundation (= 0.1.0)
+    - KYModule/Request (= 0.1.0)
+    - "KYModule/UIImage+UIImageView (= 0.1.0)"
+    - KYModule/UIKit (= 0.1.0)
+  - KYModule/Base (0.1.0)
+  - KYModule/Foundation (0.1.0):
+    - KYModule/Base
+  - KYModule/Request (0.1.0):
+    - AFNetworking/NSURLSession (~> 3.2.1)
+    - KYModule/Base
+  - "KYModule/UIImage+UIImageView (0.1.0)":
+    - KYModule/Base
+    - SDWebImage (~> 5.2.5)
+  - KYModule/UIKit (0.1.0):
+    - KYModule/Base
+  - SDWebImage (5.2.5):
+    - SDWebImage/Core (= 5.2.5)
+  - SDWebImage/Core (5.2.5)
+
+DEPENDENCIES:
+  - KYModule (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - SDWebImage
+
+EXTERNAL SOURCES:
+  KYModule:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  KYModule: 12dd4780852089a38a1846478093584c6d6e7601
+  SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
+
+PODFILE CHECKSUM: e6a82d29a467b239f4864dc3e52847777d3bfbde
+
+COCOAPODS: 1.9.1

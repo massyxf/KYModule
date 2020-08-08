@@ -1,0 +1,69 @@
+{
+  "name": "KYModule",
+  "version": "0.1.0",
+  "summary": "modules of kelvion",
+  "description": "a module repository of ky.",
+  "homepage": "https://github.com/massyxf/KYModule",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "massyxf": "ssi-yanxf@dfmc.com.cn"
+  },
+  "source": {
+    "git": "https://github.com/massyxf/KYModule.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "subspecs": [
+    {
+      "name": "Base",
+      "source_files": "KYModule/Classes/Base/**/*"
+    },
+    {
+      "name": "UIKit",
+      "source_files": "KYModule/Classes/UIKit/**/*",
+      "dependencies": {
+        "KYModule/Base": [
+
+        ]
+      }
+    },
+    {
+      "name": "Foundation",
+      "source_files": "KYModule/Classes/Foundation/**/*",
+      "dependencies": {
+        "KYModule/Base": [
+
+        ]
+      }
+    },
+    {
+      "name": "Request",
+      "source_files": "KYModule/Classes/Request/**/*",
+      "dependencies": {
+        "KYModule/Base": [
+
+        ],
+        "AFNetworking/NSURLSession": [
+          "~> 3.2.1"
+        ]
+      }
+    },
+    {
+      "name": "UIImage+UIImageView",
+      "source_files": "KYModule/Classes/UIImage+UIImageView/**/*",
+      "dependencies": {
+        "KYModule/Base": [
+
+        ],
+        "SDWebImage": [
+          "~> 5.2.5"
+        ]
+      }
+    }
+  ]
+}
