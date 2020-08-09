@@ -35,7 +35,8 @@
 
 ///每个子请求都会通过completion回调，因此需要区别处理
 -(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
-    dispatch_queue_t queue = dispatch_queue_create("ky_chain_request_queue", DISPATCH_QUEUE_SERIAL);
+    NSString *queueName = [NSString stringWithFormat:@"ky_chain_request_queue_%p",self];
+    dispatch_queue_t queue = dispatch_queue_create(queueName.UTF8String, DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
         BOOL *shouldContinue = NULL;
         *shouldContinue = YES;
