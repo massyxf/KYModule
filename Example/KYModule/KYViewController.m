@@ -7,6 +7,7 @@
 //
 
 #import "KYViewController.h"
+#import <NSString+KYExtension.h>
 
 @interface KYViewController ()
 
@@ -17,7 +18,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor redColor];
+	
+    double num = 0.001;
+    NSLog(@"%@",[NSString ky_onePointNumToString:num]);
+    NSLog(@"%@",[NSString ky_twoPointNumToString:num]);
+    NSLog(@"%@",[NSString ky_numToString:num pointCount:3]);
+    
 }
 
 - (void)didReceiveMemoryWarning
