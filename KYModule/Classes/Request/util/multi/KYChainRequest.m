@@ -33,7 +33,8 @@
     return _sema;
 }
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+///每个子请求都会通过completion回调，因此需要区别处理
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     dispatch_queue_t queue = dispatch_queue_create("ky_chain_request_queue", DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
         BOOL *shouldContinue = NULL;
@@ -47,19 +48,23 @@
             }
             self.currentRequest = obj;
             [obj startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
+                if (request != obj) {
+                    !completion ? : completion(request,result,error);
+                    return;
+                }
                 if (error.code == NSURLErrorCancelled) {
                     *shouldContinue = NO;
                     dispatch_semaphore_signal(self.sema);
                     return;
                 }
-                !self.requestComplete ? : self.requestComplete(request,result,error);
+                !completion ? : completion(request,result,error);
                 *shouldContinue = request.shouldContinue;
                 dispatch_semaphore_signal(self.sema);
             }];
         }];
         if (*shouldContinue) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                !self.chainComplete ? : self.chainComplete();
+                !completion ? : completion(self,@{},nil);
             });
         }
     });

@@ -27,14 +27,19 @@
     return self;
 }
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+///每个子请求都会通过completion回调，因此需要区别处理
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     dispatch_queue_t queue = dispatch_queue_create("ky_group_request_queue", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     [_requestArr enumerateObjectsUsingBlock:^(KYRequest * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         dispatch_group_enter(group);
         dispatch_group_async(group, queue, ^{
             [obj startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
-                !self.requestComplete ? : self.requestComplete(request,result,error);
+                if (request != obj) {
+                    !completion ? : completion(request,result,error);
+                    return;
+                }
+                !completion ? : completion(request,result,error);
                 dispatch_group_leave(group);
             }];
         });
@@ -42,21 +47,25 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (self.endRequest) {
             [self.endRequest startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
-                !self.requestComplete ? : self.requestComplete(self.endRequest,result,error);
-                [self callCompleteBlock];
+                if (request != self.endRequest) {
+                    !completion ? : completion(request,result,error);
+                    return;
+                }
+                !completion ? : completion(request,result,error);
+                [self callCompleteBlock:completion];
             }];
             return;
         }
-        [self callCompleteBlock];
+        [self callCompleteBlock:completion];
     });
     return nil;
 }
 
--(void)callCompleteBlock{
+-(void)callCompleteBlock:(KYRequestComplete)completion{
     if (_isCancelReason) {
         return;
     }
-    !self.groupComplete ? : self.groupComplete();
+    !completion ? : completion(self,@{},nil);
 }
 
 -(void)cancel{

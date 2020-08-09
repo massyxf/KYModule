@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///加入链式请求时，请求错误，是否进行下一条请求,默认为yes
 @property (nonatomic,assign)BOOL shouldContinue;
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion;
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion;
 
 -(void)cancel;
 

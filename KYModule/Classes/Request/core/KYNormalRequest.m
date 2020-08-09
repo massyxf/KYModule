@@ -49,7 +49,7 @@
 }
 
 #pragma mark - public func
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     NSString *url = self.baseUrl;
     if (self.apiStr.length > 0) {
         url = [self.baseUrl stringByAppendingPathComponent:self.apiStr];

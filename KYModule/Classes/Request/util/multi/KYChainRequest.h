@@ -11,10 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KYChainRequest : KYRequest
 
-@property (nonatomic,copy)KYRequestComplete requestComplete;
-///链式请求全部完成的回调,但是在cancel时不会回调
-@property (nonatomic,copy)KYRequestVoidComplete chainComplete;
-
 -(instancetype)initWithRequestArr:(NSArray<KYRequest *> *)requestArr;
 
 @end

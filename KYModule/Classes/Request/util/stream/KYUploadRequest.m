@@ -16,7 +16,7 @@
 
 @implementation KYUploadRequest
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     void (^uploadCompleteBlock)(NSDictionary *,NSError *) = ^(NSDictionary *result,NSError *error){
         completion(self,result,error);
     };

@@ -10,7 +10,7 @@
 #import "KYNetServiceManager.h"
 
 @interface KYDownloadRequest (){
-    NSURLSessionDataTask *_task;
+    NSURLSessionDownloadTask *_task;
 }
 
 @end
@@ -25,7 +25,7 @@
     return _cachedPath;
 }
 
--(NSURLSessionDataTask *)startRequestWithCompletion:(KYRequestComplete)completion{
+-(NSURLSessionTask *)startRequestWithCompletion:(KYRequestComplete)completion{
     void (^downloadCompleteBlock)(NSDictionary *,NSError *) = ^(NSDictionary *result,NSError *error){
         !completion ? : completion(self,result,error);
     };
