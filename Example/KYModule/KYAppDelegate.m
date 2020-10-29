@@ -8,6 +8,12 @@
 
 #import "KYAppDelegate.h"
 
+@interface KYAppDelegate (){
+    __weak UIView *_blurView;
+}
+
+@end
+
 @implementation KYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -42,5 +48,20 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - blur
+-(void)showBlurHud{
+    UIVisualEffectView *view = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    view.alpha = 1;
+    view.frame = [UIScreen mainScreen].bounds;
+    [_window addSubview:view];
+    _blurView = view;
+}
+
+-(void)hideBlurHud{
+    [_blurView removeFromSuperview];
+}
+
 
 @end

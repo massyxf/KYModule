@@ -18,6 +18,12 @@
   "platforms": {
     "ios": "8.0"
   },
+  "source_files": "KYModule/Classes/**/*",
+  "resource_bundles": {
+    "KYModule": [
+      "KYModule/Assets/**/*"
+    ]
+  },
   "subspecs": [
     {
       "name": "Base",

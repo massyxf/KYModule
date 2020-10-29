@@ -30,7 +30,7 @@ a module repository of ky.
 
   s.ios.deployment_target = '8.0'
 
-  #s.source_files = 'KYModule/Classes/**/*'
+  s.source_files = 'KYModule/Classes/**/*'
   
   s.subspec 'Base' do |b|
        b.source_files = 'KYModule/Classes/Base/**/*'
@@ -60,9 +60,9 @@ a module repository of ky.
   
   
   
-  # s.resource_bundles = {
-  #   'KYModule' => ['KYModule/Assets/*.png']
-  # }
+   s.resource_bundles = {
+     'KYModule' => ['KYModule/Assets/**/*']
+   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

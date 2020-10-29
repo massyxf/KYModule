@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0CA524BAE54C35C50F56959A /* Pods_KYModule_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C042643043AEE9760FFB3E /* Pods_KYModule_Tests.framework */; };
+		4278D723254A68E50093114B /* UIViewController+KYWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 4278D722254A68E50093114B /* UIViewController+KYWatermark.m */; };
+		4278D728254A693D0093114B /* KYWatermarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4278D727254A693D0093114B /* KYWatermarkView.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4278D721254A68E50093114B /* UIViewController+KYWatermark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KYWatermark.h"; sourceTree = "<group>"; };
+		4278D722254A68E50093114B /* UIViewController+KYWatermark.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KYWatermark.m"; sourceTree = "<group>"; };
+		4278D726254A693D0093114B /* KYWatermarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYWatermarkView.h; sourceTree = "<group>"; };
+		4278D727254A693D0093114B /* KYWatermarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYWatermarkView.m; sourceTree = "<group>"; };
 		464ADA2E9E81389FEB79F7C6 /* Pods-KYModule_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYModule_Tests.release.xcconfig"; path = "Target Support Files/Pods-KYModule_Tests/Pods-KYModule_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* KYModule_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYModule_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +154,10 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* KYViewController.h */,
 				6003F5A6195388D20070C39A /* KYViewController.m */,
+				4278D726254A693D0093114B /* KYWatermarkView.h */,
+				4278D727254A693D0093114B /* KYWatermarkView.m */,
+				4278D721254A68E50093114B /* UIViewController+KYWatermark.h */,
+				4278D722254A68E50093114B /* UIViewController+KYWatermark.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -369,8 +379,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* KYAppDelegate.m in Sources */,
+				4278D728254A693D0093114B /* KYWatermarkView.m in Sources */,
 				6003F5A7195388D20070C39A /* KYViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				4278D723254A68E50093114B /* UIViewController+KYWatermark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
