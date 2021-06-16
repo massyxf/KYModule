@@ -49,10 +49,10 @@
             }
             self.currentRequest = obj;
             [obj startRequestWithCompletion:^(KYRequest * _Nullable request, NSDictionary * _Nullable result, NSError * _Nullable error) {
-                if (request != obj) {
-                    !completion ? : completion(request,result,error);
-                    return;
-                }
+//                if (request != obj) {
+//                    !completion ? : completion(request,result,error);
+//                    return;
+//                }
                 if (error.code == NSURLErrorCancelled) {
                     *shouldContinue = NO;
                     dispatch_semaphore_signal(self.sema);

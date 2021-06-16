@@ -8,7 +8,9 @@
 #import <Foundation/Foundation.h>
 
 @class KYRequest;
-typedef void(^KYRequestComplete)(KYRequest *_Nullable request,NSDictionary *_Nullable result,NSError *_Nullable error);
+typedef void(^KYRequestComplete)(KYRequest *_Nullable request,
+                                 NSDictionary *_Nullable result,
+                                 NSError *_Nullable error);
 typedef void(^KYRequestVoidComplete)(void);
 
 NS_ASSUME_NONNULL_BEGIN
